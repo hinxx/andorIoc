@@ -24,8 +24,8 @@ dbLoadRecords("$(ADANDOR)/db/andorCCD.template",   "P=$(PREFIX),R=cam1:,PORT=$(P
 
 # Comment out the following lines if there is no Shamrock spectrograph
 #shamrockConfig(const char *portName, int shamrockId, const char *iniPath, int priority, int stackSize)
-shamrockConfig("SR1", 0, "", 0, 0)
-dbLoadRecords("$(ADANDOR)/db/shamrock.template",   "P=$(PREFIX),R=sham1:,PORT=SR1,TIMEOUT=1,PIXELS=1024")
+#shamrockConfig("SR1", 0, "", 0, 0)
+#dbLoadRecords("$(ADANDOR)/db/shamrock.template",   "P=$(PREFIX),R=sham1:,PORT=SR1,TIMEOUT=1,PIXELS=1024")
 
 # Create a standard arrays plugin
 NDStdArraysConfigure("Image1", 5, 0, "$(PORT)", 0, 0)
@@ -36,7 +36,9 @@ NDStdArraysConfigure("Image1", 5, 0, "$(PORT)", 0, 0)
 dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX),R=image1:,PORT=Image1,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(PORT),TYPE=Int16,FTVL=SHORT,NELEMENTS=4200000")
 
 # Load all other plugins using commonPlugins.cmd
-< $(ADCORE)/iocBoot/commonPlugins.cmd
+#< $(ADCORE)/iocBoot/commonPlugins.cmd
+< $(TOP)/iocBoot/$(IOC)/commonPlugins.cmd
+
 set_requestfile_path("$(ADANDOR)/andorApp/Db")
 
 #asynSetTraceMask("$(PORT)",0,3)
